@@ -1,14 +1,18 @@
-// Для кожної категорії виводимо заголовок та кількість елементів
-const items = categoriesList.getElementsByClassName("item");
-for (let i = 0; i < items.length; i++) {
-  const item = items[i];
+// Отримуємо список категорій (ul з id 'categories')
+const categoriesList = document.querySelector('#categories');
 
-  // Заголовок категорії
-  const categoryTitle = item.querySelector("h2").textContent;
+// Порахувати кількість категорій (кількість елементів li з класом 'item')
+const categoriesCount = categoriesList.querySelectorAll('.item').length;
+console.log(`Кількість категорій: ${categoriesCount}`);
 
-  // Кількість елементів у категорії
-  const categoryItemsCount = item.querySelectorAll("ul > li").length;
+// Для кожного елемента li.item
+categoriesList.querySelectorAll('.item').forEach(item => {
+  // Отримуємо заголовок категорії (тег <h2>)
+  const categoryTitle = item.querySelector('h2').textContent;
 
-  console.log(`Категорія: ${categoryTitle}`);
-  console.log(`Кількість елементів: ${categoryItemsCount}`);
-}
+  // Отримуємо кількість елементів у категорії (всі <li>, вкладені в <ul>)
+  const categoryItemsCount = item.querySelectorAll('ul > li').length;
+
+  // Виводимо в консоль
+  console.log(`Категорія: ${categoryTitle}, Кількість елементів: ${categoryItemsCount}`);
+});
