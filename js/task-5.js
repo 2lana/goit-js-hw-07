@@ -1,8 +1,3 @@
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, 0)}`;
-}
 // Функція для генерації випадкового кольору в hex-форматі
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215)
@@ -27,7 +22,3 @@ button.addEventListener("click", function () {
     randomColor.slice(5, 7),
     16
   )})`;
-
-  // Виводимо цей колір у span
-  colorSpan.textContent = randomColor;
-});
