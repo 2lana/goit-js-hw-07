@@ -1,51 +1,44 @@
-// Отримуємо елементи
-const input = document.querySelector("input");
-const createButton = document.querySelector("[data-create]");
-const destroyButton = document.querySelector("[data-destroy]");
-const boxesContainer = document.getElementById("boxes");
-
-// Функція для генерації випадкового кольору в hex-форматі
 function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, 0)}`;
+  return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0)}`;
 }
 
-// Функція для створення коробок
+// Function to create boxes
 function createBoxes(amount) {
-  const boxes = [];
-
+  const boxesContainer = document.getElementById('boxes');
+  
+  const boxesFragment = document.createDocumentFragment(); // Create a document fragment for efficient DOM manipulation
   for (let i = 0; i < amount; i++) {
-    const size = 30 + i * 10; // Розмір збільшується на 10px для кожного наступного елементу
-    const box = document.createElement("div");
+    const box = document.createElement('div');
+    const size = 30 + i * 10; // Initial size is 30px, increases by 10px for each subsequent box
     box.style.width = `${size}px`;
     box.style.height = `${size}px`;
     box.style.backgroundColor = getRandomHexColor();
-    box.style.marginBottom = "10px";
-    boxes.push(box);
+    box.classList.add('box'); // Optionally add class for styling purposes
+    boxesFragment.appendChild(box); // Append the box to the fragment
   }
-
-  // Додаємо всі коробки в DOM за одну операцію
-  boxesContainer.append(...boxes);
+  
+  boxesContainer.appendChild(boxesFragment); // Append the complete fragment to the DOM
 }
 
-// Функція для очищення всіх коробок
+// Function to destroy all boxes
 function destroyBoxes() {
-  boxesContainer.innerHTML = ""; // Очищаємо вміст контейнера
+  const boxesContainer = document.getElementById('boxes');
+  boxesContainer.innerHTML = ''; // Clear the container
 }
 
-// Обробка події для кнопки "Create"
-createButton.addEventListener("click", () => {
-  const amount = parseInt(input.value);
-
-  // Перевірка на валідність введеного значення
+// Event listeners for the buttons
+document.querySelector('[data-create]').addEventListener('click', () => {
+  const input = document.querySelector('input[type="number"]');
+  const amount = Number(input.value);
+  
   if (amount >= 1 && amount <= 100) {
-    createBoxes(amount); // Створюємо коробки
-    input.value = ""; // Очищаємо інпут
+    createBoxes(amount);
+    input.value = ''; // Clear input value
   } else {
-    alert("Please enter a number between 1 and 100");
+    alert('Please enter a number between 1 and 100');
   }
 });
 
-// Обробка події для кнопки "Destroy"
-destroyButton.addEventListener("click", destroyBoxes);
+document.querySelector('[data-destroy]').addEventListener('click', () => {
+  destroyBoxes();
+});
