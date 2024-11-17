@@ -1,24 +1,12 @@
-// Функція для генерації випадкового кольору в hex-форматі
 function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, 0)}`;
+  return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0)}`;
 }
 
-// Отримуємо посилання на кнопку та span
-const button = document.querySelector(".change-color");
-const colorSpan = document.querySelector(".color");
+const changeColorButton = document.querySelector('.change-color');
+const colorSpan = document.querySelector('.color');
 
-// Додаємо обробник події на кнопку
-button.addEventListener("click", function () {
-  // Генеруємо випадковий колір
-  const randomColor = getRandomHexColor();
-
-  // Задаємо цей колір як фон для body
-  document.body.style.backgroundColor = `rgb(${parseInt(
-    randomColor.slice(1, 3),
-    16
-  )}, ${parseInt(randomColor.slice(3, 5), 16)}, ${parseInt(
-    randomColor.slice(5, 7),
-    16
-  )})`;
+changeColorButton.addEventListener('click', () => {
+  const newColor = getRandomHexColor();
+  document.body.style.backgroundColor = newColor; // Change background color in RGB format
+  colorSpan.textContent = newColor; // Set the text content of span.color to the new color
+});
